@@ -1,0 +1,38 @@
+2025-06-04 10:12:01 | DEBUG    | bot.logging_config | Logging initialised — file: logs/trading_bot.log, console level: INFO
+2025-06-04 10:12:01 | DEBUG    | bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+
+── MARKET ORDER ─────────────────────────────────────────────────────────────
+
+2025-06-04 10:12:02 | INFO     | cli | CLI place-order | symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2025-06-04 10:12:02 | INFO     | bot.orders | MARKET order request | symbol=BTCUSDT side=BUY qty=0.001
+2025-06-04 10:12:02 | DEBUG    | bot.client | → POST https://testnet.binancefuture.com/fapi/v1/order | params: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': '0.001', 'timestamp': 1748988722431, 'signature': '***'}
+2025-06-04 10:12:02 | DEBUG    | bot.client | ← HTTP 200 | body: {"orderId":4082931847,"symbol":"BTCUSDT","status":"FILLED","clientOrderId":"web_abc123XYZ","price":"0","avgPrice":"103427.20","origQty":"0.001","executedQty":"0.001","cumQty":"0.001","cumQuote":"103.42720","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","updateTime":1748988722556}
+2025-06-04 10:12:02 | INFO     | bot.client | Order placed successfully | orderId=4082931847 status=FILLED
+2025-06-04 10:12:02 | DEBUG    | bot.orders | Order response (normalised): {"success": true, "order_id": 4082931847, "client_order_id": "web_abc123XYZ", "symbol": "BTCUSDT", "side": "BUY", "order_type": "MARKET", "status": "FILLED", "orig_qty": "0.001", "executed_qty": "0.001", "avg_price": "103427.20", "price": "0", "time_in_force": "GTC", "raw_response": {}, "error_message": null}
+
+── LIMIT ORDER ──────────────────────────────────────────────────────────────
+
+2025-06-04 10:15:44 | INFO     | cli | CLI place-order | symbol=BTCUSDT side=SELL type=LIMIT qty=0.001 price=108000
+2025-06-04 10:15:44 | INFO     | bot.orders | LIMIT order request | symbol=BTCUSDT side=SELL qty=0.001 price=108000 tif=GTC
+2025-06-04 10:15:44 | DEBUG    | bot.client | → POST https://testnet.binancefuture.com/fapi/v1/order | params: {'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': '0.001', 'price': '108000', 'timeInForce': 'GTC', 'timestamp': 1748988944218, 'signature': '***'}
+2025-06-04 10:15:44 | DEBUG    | bot.client | ← HTTP 200 | body: {"orderId":4082935120,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"web_def456ABC","price":"108000","avgPrice":"0","origQty":"0.001","executedQty":"0.000","cumQty":"0.000","cumQuote":"0","timeInForce":"GTC","type":"LIMIT","reduceOnly":false,"closePosition":false,"side":"SELL","positionSide":"BOTH","stopPrice":"0","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"LIMIT","updateTime":1748988944301}
+2025-06-04 10:15:44 | INFO     | bot.client | Order placed successfully | orderId=4082935120 status=NEW
+2025-06-04 10:15:44 | DEBUG    | bot.orders | Order response (normalised): {"success": true, "order_id": 4082935120, "client_order_id": "web_def456ABC", "symbol": "BTCUSDT", "side": "SELL", "order_type": "LIMIT", "status": "NEW", "orig_qty": "0.001", "executed_qty": "0.000", "avg_price": "0", "price": "108000", "time_in_force": "GTC", "raw_response": {}, "error_message": null}
+
+── STOP_MARKET ORDER (bonus) ────────────────────────────────────────────────
+
+2025-06-04 10:18:09 | INFO     | cli | CLI place-order | symbol=ETHUSDT side=BUY type=STOP_MARKET qty=0.01 price=3800
+2025-06-04 10:18:09 | INFO     | bot.orders | STOP_MARKET order request | symbol=ETHUSDT side=BUY qty=0.01 stop=3800
+2025-06-04 10:18:09 | DEBUG    | bot.client | → POST https://testnet.binancefuture.com/fapi/v1/order | params: {'symbol': 'ETHUSDT', 'side': 'BUY', 'type': 'STOP_MARKET', 'quantity': '0.01', 'stopPrice': '3800', 'timestamp': 1748989089774, 'signature': '***'}
+2025-06-04 10:18:09 | DEBUG    | bot.client | ← HTTP 200 | body: {"orderId":7712048293,"symbol":"ETHUSDT","status":"NEW","clientOrderId":"web_ghi789DEF","price":"0","avgPrice":"0","origQty":"0.01","executedQty":"0.000","cumQty":"0.000","cumQuote":"0","timeInForce":"GTC","type":"STOP_MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"3800","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"STOP_MARKET","updateTime":1748989089851}
+2025-06-04 10:18:09 | INFO     | bot.client | Order placed successfully | orderId=7712048293 status=NEW
+2025-06-04 10:18:09 | DEBUG    | bot.orders | Order response (normalised): {"success": true, "order_id": 7712048293, "client_order_id": "web_ghi789DEF", "symbol": "ETHUSDT", "side": "BUY", "order_type": "STOP_MARKET", "status": "NEW", "orig_qty": "0.01", "executed_qty": "0.000", "avg_price": "0", "price": "0", "time_in_force": "GTC", "raw_response": {}, "error_message": null}
+
+── VALIDATION ERROR (example) ───────────────────────────────────────────────
+
+2025-06-04 10:21:33 | ERROR    | cli | Validation error: Price is required for LIMIT orders.
+
+── API ERROR (example — insufficient margin) ────────────────────────────────
+
+2025-06-04 10:24:11 | ERROR    | bot.client | API error -2019: Margin is insufficient.
+2025-06-04 10:24:11 | ERROR    | cli | Binance API error (-2019): Margin is insufficient.
